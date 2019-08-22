@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Miru_Naibu.Command
 {
@@ -16,7 +17,7 @@ namespace Miru_Naibu.Command
         public string Cmd { get; set; }
         public string Description { get; set; }
         //STATIC
-        private static List<Command> commandList = null;
+        private static List<Command> commandList = new List<Command>();
         internal static bool UnistallCmd(List<Command> commandList,string nameCmd) {
             foreach (Command cmd in commandList) {
                 if(cmd.Name.Equals(nameCmd)) {
@@ -31,6 +32,15 @@ namespace Miru_Naibu.Command
             commandList.Add(new Setting("Setting","System","setting","Change setting"));
             commandList.Add(new Setting("ChangeDirectory","System","cd","Move in the directorys"));
             //return commandList;
+        }
+        public static string[] CmdSplit(string cmdLine) {
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[ ]{2,}", options);     
+            cmdLine = regex.Replace(cmdLine, " ");
+            if (cmdLine[0] == ' ') {
+                cmdLine.Substring(1);
+            }
+            return cmdLine.Split(' ');
         }
     }
 }
