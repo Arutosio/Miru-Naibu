@@ -12,12 +12,16 @@ namespace Miru_Naibu
         {
             //Start FASE - Checking
 
-            ArrayList cmd = new ArrayList();
             //Start
-            ColorLine.WriteC("Console:Aru> ", Green);
-            Console.WriteLine(User.GetUserInstance.Username);
-            Setting cmdSet = new Setting("nome","setting","setting","lalalalal");
-            Console.WriteLine(cmdSet.Name + cmdSet.Type + cmdSet.Cmd + cmdSet.x);
+            MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
+            string cmd = "";
+            do {
+            terminal.ReadyString();
+            terminal.RunCommand(Console.ReadLine());
+            } while(cmd.ToLower().Equals("exit"));
+            //Console.WriteLine(User.GetUserInstance.Username);
+            //Setting cmdSet = new Setting("nome","setting","setting","lalalalal");
+            //Console.WriteLine(cmdSet.Name + cmdSet.Type + cmdSet.Cmd + cmdSet.x);
             Console.ReadKey();
         }
     }

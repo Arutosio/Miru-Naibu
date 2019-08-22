@@ -4,19 +4,19 @@ namespace Miru_Naibu.Entities
     {
         private static User instance = null;
         private static readonly object padlock = new object();
-        private User() {
-            Username = "fileUser";
-            Password = "fileMD5password";
-        }
         public static User GetUserInstance { 
             get {
                 lock (padlock) {
-                    if(instance == null) {
+                    if(User.instance == null) {
                         return new User();
                     } 
-                    return instance;
+                    return User.instance;
                 }
             }
+        }
+        private User() {
+            Username = "fileUser";
+            Password = "fileMD5password";
         }
         public string Username { get; private set; } = "default";
         public string Password { get; private set; } = "default";
