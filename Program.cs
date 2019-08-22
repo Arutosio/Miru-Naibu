@@ -20,8 +20,9 @@ namespace Miru_Naibu
             do {
             terminal.ReadyString();
             cmd = Console.ReadLine();
+            if(cmd.ToLower().Replace(" ","").Equals("exit")) {break;}
             terminal.RunCommand(cmd);
-            } while (!cmd.ToLower().Replace(" ","").Equals("exit"));
+            } while (true);
             //Console.WriteLine(User.GetUserInstance.Username);
             //Setting cmdSet = new Setting("nome","setting","setting","lalalalal");
             //Console.WriteLine(cmdSet.Name + cmdSet.Type + cmdSet.Cmd + cmdSet.x);
