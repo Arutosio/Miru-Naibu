@@ -16,11 +16,10 @@ namespace Miru_Naibu.Entities
         }
         internal void ReadyString()
         {
-            Console.Write("M:");
-            ColorLine.WriteC(Environment.MachineName, Yellow);
-            Console.Write('@');
+            ColorLine.WriteC(Environment.MachineName, Cyan);
+            ColorLine.WriteC("@", Magenta);
             ColorLine.WriteC(User.Username, Green);
-            Console.Write("> ");
+            ColorLine.WriteC("> ", Yellow);
         }
         internal void RunCommand(string cmdLine)
         {
