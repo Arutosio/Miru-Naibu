@@ -26,7 +26,6 @@ namespace Miru_Naibu.Entities
         {
             return "ConsoleReady:";
         }
-
         internal void RunCommand(string v)
         {
             throw new NotImplementedException();
