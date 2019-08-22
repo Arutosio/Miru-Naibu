@@ -9,22 +9,30 @@ namespace Miru_Naibu.Entities
 {
     public class MiruNaibu
     {
-        public User User { get; }
         private MiruNaibu() {
-            User = User.GetUserInstance;
             ClassCmd.LoadCommands();
         }
         internal void ReadyString()
         {
             ColorLine.WriteC(Environment.MachineName, Cyan);
             ColorLine.WriteC("@", Magenta);
-            ColorLine.WriteC(User.Username, Green);
+            ColorLine.WriteC(User.GetUserInstance.Username, Green);
             ColorLine.WriteC("> ", Yellow);
         }
         internal void RunCommand(string cmdLine)
         {
-            foreach (string str in ClassCmd.CmdSplit(cmdLine)) {
-                Console.WriteLine(str);
+            List<string> cmdList = ClassCmd.CmdSplit(cmdLine);
+            switch (cmdList[0]) {
+                case "help":
+                    Help.HelpSwitch(cmdList);
+                break;
+                case "setting":
+                break;
+                case "cd":
+                break;
+                default:
+                Console.WriteLine($"Command \"{cmdList[0]}\" not found.");
+                break;
             }
         }
         private static MiruNaibu instance = null;
@@ -39,6 +47,5 @@ namespace Miru_Naibu.Entities
                 }
             }
         }
-
     }
 }

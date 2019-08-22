@@ -23,9 +23,6 @@ namespace Miru_Naibu
             if(cmd.ToLower().Replace(" ","").Equals("exit")) {break;}
             terminal.RunCommand(cmd);
             } while (true);
-            //Console.WriteLine(User.GetUserInstance.Username);
-            //Setting cmdSet = new Setting("nome","setting","setting","lalalalal");
-            //Console.WriteLine(cmdSet.Name + cmdSet.Type + cmdSet.Cmd + cmdSet.x);
         }
     }
 }
