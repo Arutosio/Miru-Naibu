@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Miru_Naibu.Entities;
 
 namespace Miru_Naibu.MethodCommandSystem
 {
     public sealed class ChangeDirectory
     {
-        public static DirectoryInfo CurrentDirectory { get; set; } = new DirectoryInfo(Directory.GetCurrentDirectory());
         public static void ChangeDirectorySwitch(List<string> subcmdList) {
             switch (subcmdList.Count) {
                 case 1:
@@ -19,13 +19,13 @@ namespace Miru_Naibu.MethodCommandSystem
             }
         }
         internal static void GoSubDirectory() {
-            CurrentDirectory = Directory.GetParent(CurrentDirectory.FullName);
+            MiruNaibu.GetMiruNaibuInstance.CurrentDirectory = Directory.GetParent(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName);
         }
         internal static void GoUpDirectory(string folderName) {
             if (Directory.Exists(folderName)) {
-                CurrentDirectory = new DirectoryInfo(folderName); 
-            } else if(Directory.Exists(Path.Combine(CurrentDirectory.FullName, folderName))) {
-                CurrentDirectory = new DirectoryInfo(Path.Combine(CurrentDirectory.FullName, folderName)); 
+                MiruNaibu.GetMiruNaibuInstance.CurrentDirectory = new DirectoryInfo(folderName); 
+            } else if(Directory.Exists(Path.Combine(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, folderName))) {
+                MiruNaibu.GetMiruNaibuInstance.CurrentDirectory = new DirectoryInfo(Path.Combine(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, folderName)); 
             } else { Console.WriteLine("The folder \"{0}\" does not exits in the current directory.", folderName); }
         }
     }

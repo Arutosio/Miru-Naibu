@@ -34,7 +34,7 @@ namespace Miru_Naibu.MethodCommandSystem
                 catch (Exception ex) { /* Program.pL.Percent = -1; */ColorLine.WriteLineC(" ### Error # \r\n" + ex.Message, Red); }
             }
         }
-        public static bool CheckURLValid(string source)
+        internal static bool CheckURLValid(string source)
         {
             bool res = false;
             Uri uriResult;
@@ -62,7 +62,7 @@ namespace Miru_Naibu.MethodCommandSystem
             res = true;
             return res;
         }
-        public static bool IsURLExist(string url)
+        internal static bool IsURLExist(string url)
         {
             bool valid = false;
             try

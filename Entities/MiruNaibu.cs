@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Miru_Naibu.Library;
 using Miru_Naibu.MethodCommandSystem;
 using static System.ConsoleColor;
@@ -8,7 +9,9 @@ namespace Miru_Naibu.Entities
 {
     public class MiruNaibu
     {
+        public DirectoryInfo CurrentDirectory { get; set; }
         private MiruNaibu() {
+            CurrentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
             Command.LoadCommands();
         }
         internal void ReadyString()
@@ -16,15 +19,15 @@ namespace Miru_Naibu.Entities
             Console.Write("M:");
             ColorLine.WriteC(Environment.MachineName, Cyan);
             ColorLine.WriteC("@", Magenta);
-            ColorLine.WriteC(User.GetUserInstance.Username, Green);
+            ColorLine.WriteC(Environment.UserName, Green);
             Console.Write("Dir:");
-            ColorLine.WriteLineC(ChangeDirectory.CurrentDirectory.FullName, Yellow);
+            ColorLine.WriteLineC(CurrentDirectory.FullName, Yellow);
             Console.Write("$> ");
         }
         public void RunCommand(List<string> cmdList)
         {
             string cmdFirst = cmdList[0];
-            if (cmdList.Count > 1) { cmdList.RemoveAt(0); }
+            cmdList.RemoveAt(0);
             switch (cmdFirst) {
                 case "help":
                     Help.HelpSwitch(cmdList);
@@ -35,8 +38,15 @@ namespace Miru_Naibu.Entities
                 case "cd":
                     ChangeDirectory.ChangeDirectorySwitch(cmdList);
                 break;
+                case "ls":
+                    if(cmdList.Count == 0) {
+                        ListOfElement.ListSwitch(new List<string>() {"default"});
+                    } else { ListOfElement.ListSwitch(cmdList); }
+                break;
                 default:
-                    Console.WriteLine($"Command \"{cmdList[0]}\" not found.");
+                if (cmdList.Count<=0) {
+                    Console.WriteLine("Write a command.");
+                } else { Console.WriteLine($"Command \"{cmdList[0]}\" not found."); }
                 break;
             }
         }
