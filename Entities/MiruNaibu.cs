@@ -1,37 +1,42 @@
 using System;
 using System.Collections.Generic;
-using Miru_Naibu.Command;
 using Miru_Naibu.Library;
+using Miru_Naibu.MethodCommandSystem;
 using static System.ConsoleColor;
-using ClassCmd = Miru_Naibu.Command.Command;
 
 namespace Miru_Naibu.Entities
 {
     public class MiruNaibu
     {
         private MiruNaibu() {
-            ClassCmd.LoadCommands();
+            Command.LoadCommands();
         }
         internal void ReadyString()
         {
+            Console.Write("M:");
             ColorLine.WriteC(Environment.MachineName, Cyan);
             ColorLine.WriteC("@", Magenta);
             ColorLine.WriteC(User.GetUserInstance.Username, Green);
-            ColorLine.WriteC("> ", Yellow);
+            Console.Write("Dir:");
+            ColorLine.WriteLineC(ChangeDirectory.CurrentDirectory.FullName, Yellow);
+            Console.Write("$> ");
         }
-        internal void RunCommand(string cmdLine)
+        public void RunCommand(List<string> cmdList)
         {
-            List<string> cmdList = ClassCmd.CmdSplit(cmdLine);
-            switch (cmdList[0]) {
+            string cmdFirst = cmdList[0];
+            if (cmdList.Count > 1) { cmdList.RemoveAt(0); }
+            switch (cmdFirst) {
                 case "help":
                     Help.HelpSwitch(cmdList);
                 break;
                 case "setting":
+                    Setting.SettingSwitch(cmdList);
                 break;
                 case "cd":
+                    ChangeDirectory.ChangeDirectorySwitch(cmdList);
                 break;
                 default:
-                Console.WriteLine($"Command \"{cmdList[0]}\" not found.");
+                    Console.WriteLine($"Command \"{cmdList[0]}\" not found.");
                 break;
             }
         }
