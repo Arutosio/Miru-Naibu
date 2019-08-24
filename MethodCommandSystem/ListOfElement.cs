@@ -8,8 +8,9 @@ namespace Miru_Naibu.MethodCommandSystem
 {
     public sealed class ListOfElement
     {
-        public static void  ListSwitch(List<string> subcmdList) {
-            switch (subcmdList[0]) {
+        public static void  ListOfElementSwitch(List<string> subCmdList) {
+            if(subCmdList.Count == 0) { subCmdList = new List<string>() {"default"}; }
+            switch (subCmdList[0]) {
                 case "default":
                     Console.WriteLine("TO DO CASE 0 lS");
                 break;
@@ -20,11 +21,10 @@ namespace Miru_Naibu.MethodCommandSystem
                     ListOfDirectory();
                 break;
                 default:
-                    Console.WriteLine("Error with the properti {0}",subcmdList[0]);
+                    Console.WriteLine("Error with the properti {0}",subCmdList[0]);
                 break;
             }
         }
-
         private static void ListOfDirectory()
         {
             string[] listOfFolders = Directory.GetDirectories(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, "",SearchOption.AllDirectories);

@@ -7,14 +7,16 @@ namespace Miru_Naibu.MethodCommandSystem
 {
     public sealed class ChangeDirectory
     {
-        public static void ChangeDirectorySwitch(List<string> subcmdList) {
-            switch (subcmdList.Count) {
+        public static void ChangeDirectorySwitch(List<string> subCmdList) {          
+            switch (subCmdList.Count) {
                 case 1:
-                    if(subcmdList[0].Equals("..")) { GoSubDirectory(); }
-                    else { GoUpDirectory(subcmdList[0]); }
+                    if(subCmdList[0].Equals("..")) { GoSubDirectory(); }
+                    else { GoUpDirectory(subCmdList[0]); }
                 break;
                 default:
-                    Console.WriteLine("Error with the properti {0}",subcmdList[0]);
+                    if (subCmdList.Count<=0) {
+                        Console.WriteLine("The comand \"cd\" need a parameter.");
+                    } else { Console.WriteLine($"Parameter \"{subCmdList[0]}\" not found."); }
                 break;
             }
         }

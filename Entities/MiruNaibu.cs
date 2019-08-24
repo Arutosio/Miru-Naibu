@@ -39,9 +39,7 @@ namespace Miru_Naibu.Entities
                     ChangeDirectory.ChangeDirectorySwitch(cmdList);
                 break;
                 case "ls":
-                    if(cmdList.Count == 0) {
-                        ListOfElement.ListSwitch(new List<string>() {"default"});
-                    } else { ListOfElement.ListSwitch(cmdList); }
+                    ListOfElement.ListOfElementSwitch(cmdList);
                 break;
                 default:
                 if (cmdList.Count<=0) {
