@@ -32,7 +32,6 @@ namespace Miru_Naibu.MethodCommandSystem
                 Console.WriteLine("Num: {0} - Folder Name: {1}", i, Path.GetDirectoryName(listOfFolders[i]));
             }
         }
-
         internal static void ListOfFiles()
         {
             string[] listOfFiles = Directory.GetFiles(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, "*");

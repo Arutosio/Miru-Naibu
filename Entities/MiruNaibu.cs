@@ -20,7 +20,7 @@ namespace Miru_Naibu.Entities
             ColorLine.WriteC(Environment.MachineName, Cyan);
             ColorLine.WriteC("@", Magenta);
             ColorLine.WriteC(Environment.UserName, Green);
-            Console.Write("Dir:");
+            Console.Write(" Dir:");
             ColorLine.WriteLineC(CurrentDirectory.FullName, Yellow);
             Console.Write("$> ");
         }
@@ -54,7 +54,7 @@ namespace Miru_Naibu.Entities
             get {
                 lock (padlock) {
                     if(MiruNaibu.instance == null) {
-                        return new MiruNaibu();
+                        instance = new MiruNaibu();
                     } 
                     return MiruNaibu.instance;
                 }

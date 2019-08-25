@@ -21,7 +21,7 @@ namespace Miru_Naibu.MethodCommandSystem
             }
         }
         internal static void GoSubDirectory() {
-            MiruNaibu.GetMiruNaibuInstance.CurrentDirectory = Directory.GetParent(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName);
+            MiruNaibu.GetMiruNaibuInstance.CurrentDirectory = new DirectoryInfo(Directory.GetParent(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName).FullName);
         }
         internal static void GoUpDirectory(string folderName) {
             if (Directory.Exists(folderName)) {
