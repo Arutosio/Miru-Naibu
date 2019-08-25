@@ -7,7 +7,7 @@ using static System.ConsoleColor;
 namespace Miru_Naibu
 {
     class Program
-    {
+    {//Command to make a release: dotnet publish -c Release -r win10-x64 OR linux-x64
         static void Main(string[] args)
         {
             //Run FASE - Checking
