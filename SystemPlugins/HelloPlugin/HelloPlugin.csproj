@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-  
-  <ProjectReference Include="..\PluginBase\PluginBase.csproj">
-    <Private>false</Private>
-  </ProjectReference>
+  <ItemGroup>
+    <ProjectReference Include="..\PluginBase\PluginBase.csproj">
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

@@ -18,8 +18,9 @@ namespace Miru_Naibu
             MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
             //Start
             string cmd = "";
-            string[] x = {"hello"}; 
+            string[] x = {"xcopy"}; 
             PluginManager.Start(x);
+            /*
             do {
             terminal.ReadyString();
             cmd = Console.ReadLine();
@@ -27,6 +28,7 @@ namespace Miru_Naibu
             else if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrWhiteSpace(cmd)){
                 terminal.RunCommand(Command.CmdSplit(cmd)); }
             } while (true);
+            */
         }
     }
 }
