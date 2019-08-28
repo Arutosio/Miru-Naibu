@@ -1,3 +1,4 @@
+using System;
 namespace PluginBase
 {
     public interface ICommand {

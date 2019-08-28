@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using PluginBase;
@@ -47,7 +48,17 @@ namespace Miru_Naibu.Library
             } catch (Exception ex) { Console.WriteLine(ex); }
 
             static Assembly LoadPlugin(string relativePath) {
-                throw new NotImplementedException();
+                // Navigate up to the solution root
+                string root = Path.GetFullPath(Path.Combine(
+                    Path.GetDirectoryName(
+                        Path.GetDirectoryName(
+                            Path.GetDirectoryName(
+                                Path.GetDirectoryName(
+                                    Path.GetDirectoryName(typeof(Program).Assembly.Location)))))));
+                string pluginLocation = Path.GetFullPath(Path.Combine(root, relativePath.Replace('\\', Path.DirectorySeparatorChar)));
+                Console.WriteLine($"Loading commands from: {pluginLocation}");
+                PluginLoadContext loadContext = new PluginLoadContext(pluginLocation);
+                return loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pluginLocation)));
             }
 
             static IEnumerable<ICommand> CreateCommands(Assembly assembly) {
