@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using Miru_Naibu.Entities;
-using Miru_Naibu.Library;
 using PluginBase;
-using static System.ConsoleColor;
-namespace Miru_Naibu
+
+namespace Miru_Naibu.Library
 {
-    class Program
-    {//Command to make a release: dotnet publish -c Release -r win10-x64 OR linux-x64
-        static void Main(string[] args)
-        {
+    public class PluginManager
+    {
+        public static void Start(string[] args) {
             try {
                 if (args.Length == 1 && args[0] == "/d") {
                     Console.WriteLine("Waiting for any key...");
@@ -70,23 +65,10 @@ namespace Miru_Naibu
                     string availableTypes = string.Join(",", assembly.GetTypes().Select(t => t.FullName));
                     throw new ApplicationException(
                         $"Can't find any type which implements ICommand in {assembly} from {assembly.Location}.\n" +
-                        $"Available types: {availableTypes}");
+                        $"Available types: {availableTypes}"
+                    );
                 }
             }
-
-            /*
-            //Run FASE - Checking
-            MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
-            //Start
-            string cmd = "";
-            do {
-            terminal.ReadyString();
-            cmd = Console.ReadLine();
-            if(cmd.ToLower().Replace(" ","").Equals("exit")) { break; }
-            else if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrWhiteSpace(cmd)){
-                terminal.RunCommand(Command.CmdSplit(cmd)); }
-            } while (true);
-             */
         }
     }
 }
