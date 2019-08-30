@@ -7,7 +7,7 @@ using PluginBase;
 
 namespace Miru_Naibu.Library
 {
-    public class PluginManager
+    public static class PluginManager
     {
         public static void Start(string[] args) {
             try {
@@ -16,8 +16,15 @@ namespace Miru_Naibu.Library
                     Console.ReadLine();
                 }
                 //START LOAD commands from plugins.
+                Console.WriteLine("");
                 string[] pluginPaths = new string[] {
                     // Paths to plugins to load.
+                    //@"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll",
+                    //@"JsonPlugin\bin\Debug\netcoreapp3.0\JsonPlugin.dll",
+                    @"SystemPlugin\XcopyablePlugin\bin\Debug\netcoreapp3.0\XcopyablePlugin.dll",
+                    //@"OldJsonPlugin\bin\Debug\netcoreapp2.1\OldJsonPlugin.dll",
+                    //@"FrenchPlugin\bin\Debug\netcoreapp2.1\FrenchPlugin.dll",
+                    //@"UVPlugin\bin\Debug\netcoreapp2.1\UVPlugin.dll",
                 };
 
                 IEnumerable<ICommand> commands = pluginPaths.SelectMany(pluginPath => {
@@ -48,7 +55,7 @@ namespace Miru_Naibu.Library
             } catch (Exception ex) { Console.WriteLine(ex); }
 
             static Assembly LoadPlugin(string relativePath) {
-                // Navigate up to the solution root
+                // Navigate up to the solution root 
                 string root = Path.GetFullPath(Path.Combine(
                     Path.GetDirectoryName(
                         Path.GetDirectoryName(
@@ -56,6 +63,10 @@ namespace Miru_Naibu.Library
                                 Path.GetDirectoryName(
                                     Path.GetDirectoryName(typeof(Program).Assembly.Location)))))));
                 string pluginLocation = Path.GetFullPath(Path.Combine(root, relativePath.Replace('\\', Path.DirectorySeparatorChar)));
+                /*
+                Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), relativePath));
+                string pluginLocation = Path.Combine(Directory.GetCurrentDirectory(), relativePath);
+                */
                 Console.WriteLine($"Loading commands from: {pluginLocation}");
                 PluginLoadContext loadContext = new PluginLoadContext(pluginLocation);
                 return loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pluginLocation)));

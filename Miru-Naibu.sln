@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Miru-Naibu", "Miru-Naibu.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemPlugins", "SystemPlugins", "{ABA5E397-021E-4C76-93C0-9A964E4B0F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloPlugin", "SystemPlugins\HelloPlugin\HelloPlugin.csproj", "{126D4923-B944-48A4-9617-5C563611E4BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloPlugin", "SystemPlugins\HelloPlugin\HelloPlugin.csproj", "{126D4923-B944-48A4-9617-5C563611E4BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XcopyablePlugin", "SystemPlugins\XcopyablePlugin\XcopyablePlugin.csproj", "{F2047AA5-AB27-4D00-81C0-CDDEDC09E225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XcopyablePlugin", "SystemPlugins\XcopyablePlugin\XcopyablePlugin.csproj", "{F2047AA5-AB27-4D00-81C0-CDDEDC09E225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,11 +33,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {91095A3A-6050-4826-9E1B-701197F2060C}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{126D4923-B944-48A4-9617-5C563611E4BF} = {ABA5E397-021E-4C76-93C0-9A964E4B0F89}
 		{F2047AA5-AB27-4D00-81C0-CDDEDC09E225} = {ABA5E397-021E-4C76-93C0-9A964E4B0F89}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91095A3A-6050-4826-9E1B-701197F2060C}
 	EndGlobalSection
 EndGlobal
