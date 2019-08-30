@@ -7,9 +7,9 @@ using PluginBase;
 
 namespace Miru_Naibu.Library
 {
-    public static class PluginManager
-    {
-        public static void Start(string[] args) {
+    public static class PluginManager {
+        public static void Start(string[] args)
+        {
             try {
                 if (args.Length == 1 && args[0] == "/d") {
                     Console.WriteLine("Waiting for any key...");
@@ -91,6 +91,15 @@ namespace Miru_Naibu.Library
                     );
                 }
             }
+        }
+        public static bool CheckInstall() {
+            return Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"));
+        }
+        public static bool Install() {
+            Console.WriteLine(Directory.GetCurrentDirectory());
+            if(CheckInstall()) {
+                Console.WriteLine("La cartella Plugins esiste di gia."); return false;
+            } else { Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Plugins")); return true;}
         }
     }
 }
