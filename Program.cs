@@ -15,6 +15,7 @@ namespace Miru_Naibu
     {//Command to make a release: dotnet publish -c Release -r win10-x64 OR linux-x64
         static void Main(string[] args)
         {
+            /*
             if(!PluginManager.CheckDirPlugins()) {
                Console.WriteLine("Install...");
                PluginManager.Install();
@@ -24,7 +25,6 @@ namespace Miru_Naibu
                 PluginManager.LoadPlugins();
             }
 
-            /*
             Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll"));
             string[] x = {Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll")}; 
             */
@@ -32,17 +32,27 @@ namespace Miru_Naibu
             //Run FASE - Checking
             MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
             //Start
-            string cmd = "";
-            string[] x = {"xcopy"}; 
-            PluginManager.Start(x);
+            string cmd = ""; 
             do {
-            terminal.ReadyString();
-            cmd = Console.ReadLine();
-            if(cmd.ToLower().Replace(" ","").Equals("exit")) { break; }
-            else if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrWhiteSpace(cmd)){
-                terminal.RunCommand(Command.CmdSplit(cmd)); }
+                terminal.ReadyString();
+                cmd = Console.ReadLine();
+                PluginManager.Start(CmdSplit(cmd));
+                if(cmd.ToLower().Replace(" ","").Equals("exit")) { break; }
+                else if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrWhiteSpace(cmd)) {
+                    terminal.RunCommand(Command.CmdSplit(cmd)); }
             } while (true);
+            /*
+            */
             Console.ReadKey();
+        }
+        public static string[] CmdSplit(string cmdLine) {
+            RegexOptions options = RegexOptions.None;
+            Regex regex = new Regex("[ ]{2,}", options);     
+            cmdLine = regex.Replace(cmdLine, " ");
+            if (cmdLine[0] == ' ') {
+                cmdLine.Substring(1);
+            }
+            return cmdLine.Split(' ');
         }
     }
 }

@@ -12,8 +12,6 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <LangVersion>8.0</LangVersion> 
   </PropertyGroup>
-    <!--
-    -->
 
   <ItemGroup>
     <Compile Remove="PluginBase\**" />
@@ -21,6 +19,8 @@
     <EmbeddedResource Remove="PluginBase\**" />
     <None Remove="PluginBase\**" />
   </ItemGroup>
+    <!--
+    -->
   <ItemGroup>
     <Compile Remove="SystemPlugins\**" />
     <Content Remove="SystemPlugins\**" />
