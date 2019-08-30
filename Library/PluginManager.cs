@@ -92,14 +92,41 @@ namespace Miru_Naibu.Library
                 }
             }
         }
-        public static bool CheckInstall() {
+        public static bool CheckDirPlugins() {
             return Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"));
         }
-        public static bool Install() {
-            Console.WriteLine(Directory.GetCurrentDirectory());
-            if(CheckInstall()) {
-                Console.WriteLine("La cartella Plugins esiste di gia."); return false;
-            } else { Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Plugins")); return true;}
+        public static bool IsDirectoryEmpty() {
+            return !Directory.EnumerateFileSystemEntries(Path.Combine(Directory.GetCurrentDirectory(), "Plugins")).Any();
         }
+        public static void Install() {
+            Console.WriteLine(Directory.GetCurrentDirectory());
+            if(CheckDirPlugins()) {
+                Console.WriteLine("La cartella Plugins esiste di gia.");;
+            } else { Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"));}
+        }
+        public static void LoadPlugins() {
+            if(!IsDirectoryEmpty()) {
+                string[] allDll = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
+                //PrintFilesDir(allDll);
+                List<Assembly> pluginsAssembly = new List<Assembly>();
+                foreach (string  pahtFile in allDll)
+                {
+                    Console.WriteLine($"Loading commands from: {pahtFile}");
+                    PluginLoadContext loadContext = new PluginLoadContext(pahtFile);
+                    pluginsAssembly.Add(loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile))));
+                    Console.WriteLine("ASSEMBLY: "+loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile)))
+                    .FullName);
+                    //CreateCommands(loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile))));
+                }
+                Console.WriteLine("Assemble aggiunto alla liosta");          
+            }
+        }
+        public static void PrintFilesDir(string[] allFiles) {
+            foreach (string file in allFiles)
+            {
+                Console.WriteLine(file);
+            }
+        }
+        static IEnumerable<ICommand> cmds;
     }
 }

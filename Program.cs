@@ -15,11 +15,20 @@ namespace Miru_Naibu
     {//Command to make a release: dotnet publish -c Release -r win10-x64 OR linux-x64
         static void Main(string[] args)
         {
+            if(!PluginManager.CheckDirPlugins()) {
+               Console.WriteLine("Install...");
+               PluginManager.Install();
+            }
+            if(!PluginManager.IsDirectoryEmpty()) {
+                Console.WriteLine("LoadPlugins....");
+                PluginManager.LoadPlugins();
+            }
+            
+            /*
             Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll"));
             string[] x = {Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll")}; 
             PluginManager.Start(x);
             //Run FASE - Checking
-            /*
             MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
             //Start
             string cmd = "";
@@ -33,6 +42,7 @@ namespace Miru_Naibu
                 terminal.RunCommand(Command.CmdSplit(cmd)); }
             } while (true);
             */
+            Console.ReadKey();
         }
     }
 }
