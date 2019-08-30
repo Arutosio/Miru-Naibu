@@ -7,6 +7,7 @@ namespace PluginBase
         string Cmd { get; }
         string Description { get; }
         int Execute();
-
+        int Execute(string param);
+        int Execute(string[] subInCmd);
     }
 }

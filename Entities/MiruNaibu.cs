@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Miru_Naibu.Library;
 using Miru_Naibu.MethodCommandSystem;
+using PluginBase;
 using static System.ConsoleColor;
 
 namespace Miru_Naibu.Entities
@@ -16,11 +18,11 @@ namespace Miru_Naibu.Entities
         }
         internal void ReadyString()
         {
-            Console.Write("M:");
-            ColorLine.WriteC(Environment.MachineName, Cyan);
-            ColorLine.WriteC("@", Magenta);
             ColorLine.WriteC(Environment.UserName, Green);
-            Console.Write(" Dir:");
+            ColorLine.WriteC("@", Magenta);
+            //Console.Write("M:");
+            ColorLine.WriteC(Environment.MachineName, Cyan);
+            Console.Write(" Dir: ");
             ColorLine.WriteLineC(CurrentDirectory.FullName, Yellow);
             Console.Write("$> ");
         }
@@ -42,9 +44,21 @@ namespace Miru_Naibu.Entities
                     ListOfElement.ListOfElementSwitch(cmdList);
                 break;
                 default:
-                if (cmdList.Count<=0) {
-                    Console.WriteLine("Write a command.");
-                } else { Console.WriteLine($"Command \"{cmdList[0]}\" not found."); }
+                    /*
+                    */
+                    if (cmdFirst == string.Empty) {
+                        Console.WriteLine("Write a command.");
+                    } 
+                    else {
+                        ICommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
+                        if (command != null) { command.Execute(); } 
+                        else { 
+                            Console.WriteLine($"Command \"{cmdFirst}\" not found."); 
+                            foreach (ICommand cmd in PluginManager.commands) {
+                                Console.WriteLine($"Name: {cmd.Name}\t -Author: {cmd.Author}  -CMD: {cmd.Cmd} -Desc: {cmd.Description}");
+                            } //END Output load commands.
+                        }
+                    }
                 break;
             }
         }

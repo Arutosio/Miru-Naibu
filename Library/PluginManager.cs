@@ -10,41 +10,6 @@ namespace Miru_Naibu.Library
     public static class PluginManager {
         public static string[] pluginPaths = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
         public static IEnumerable<ICommand> commands;
-        public static void Start(string[] args)
-        {
-            try {
-                if (args.Length == 1 && args[0] == "/d") {
-                    Console.WriteLine("Waiting for any key...");
-                    Console.ReadLine();
-                }
-                //START LOAD commands from plugins.
-                ReloadPlugins();
-                //END LOAD commands
-                while(true) {
-                    args = Program.CmdSplit(Console.ReadLine());
-                    if (args.Length == 0) {
-                        Console.WriteLine("Commands: ");
-                        //START Output the loaded commands.
-                        foreach (ICommand command in commands) {
-                            Console.WriteLine($"{command.Name}\t - {command.Author} - {command.Cmd} - {command.Description}");
-                        } //END Output load commands.
-                    }
-                    else {
-                        foreach (string commandName in args) {
-                            Console.WriteLine($"-- {commandName} --");
-                            // Execute the command with the name passed as an argument.
-                            ICommand command = commands.FirstOrDefault(c => c.Cmd == commandName);
-                            if (command == null) {
-                                Console.WriteLine("No such command is known.");
-                                return;
-                            }
-                            command.Execute();
-                            Console.WriteLine();
-                        }
-                    }
-                }
-            } catch (Exception ex) { Console.WriteLine(ex); }
-        }
         public static void ReloadPlugins() {
             commands = pluginPaths.SelectMany(pluginPath => {
                 Assembly pluginAssembly = LoadPlugin(pluginPath);
