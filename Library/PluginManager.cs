@@ -17,6 +17,7 @@ namespace Miru_Naibu.Library
                 }
                 //START LOAD commands from plugins.
                 Console.WriteLine("");
+                /*
                 string[] pluginPaths = new string[] {
                     // Paths to plugins to load.
                     //@"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll",
@@ -26,7 +27,8 @@ namespace Miru_Naibu.Library
                     //@"FrenchPlugin\bin\Debug\netcoreapp2.1\FrenchPlugin.dll",
                     //@"UVPlugin\bin\Debug\netcoreapp2.1\UVPlugin.dll",
                 };
-
+                */
+                string[] pluginPaths = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
                 IEnumerable<ICommand> commands = pluginPaths.SelectMany(pluginPath => {
                     Assembly pluginAssembly = LoadPlugin(pluginPath);
                     return CreateCommands(pluginAssembly);
@@ -109,6 +111,7 @@ namespace Miru_Naibu.Library
                 string[] allDll = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
                 //PrintFilesDir(allDll);
                 List<Assembly> pluginsAssembly = new List<Assembly>();
+                //IEnumerable<ICommand> cmds = new IEnumerable<ICommand>();
                 foreach (string  pahtFile in allDll)
                 {
                     Console.WriteLine($"Loading commands from: {pahtFile}");
@@ -116,7 +119,20 @@ namespace Miru_Naibu.Library
                     pluginsAssembly.Add(loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile))));
                     Console.WriteLine("ASSEMBLY: "+loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile)))
                     .FullName);
-                    //CreateCommands(loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile))));
+                    /*
+                    IEnumerable<ICommand> CreateCmd = CreateCmd(loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pahtFile)))
+                    static IEnumerable<ICommand> CreateCmd(Assembly assembly) {
+                    int count = 0;
+                    foreach (Type type in assembly.GetTypes()) {
+                        if (typeof(ICommand).IsAssignableFrom(type)) {
+                            ICommand result = Activator.CreateInstance(type) as ICommand;
+                            if (result != null) {
+                                count++;
+                                yield return result;
+                            }
+                        }
+                    }
+                    */
                 }
                 Console.WriteLine("Assemble aggiunto alla liosta");          
             }
@@ -127,6 +143,5 @@ namespace Miru_Naibu.Library
                 Console.WriteLine(file);
             }
         }
-        static IEnumerable<ICommand> cmds;
     }
 }

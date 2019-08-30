@@ -18,7 +18,6 @@ namespace Miru_Naibu.Library
             {
                 return LoadFromAssemblyPath(assemblyPath);
             }
-
             return null;
         }
 

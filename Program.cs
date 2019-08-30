@@ -23,11 +23,12 @@ namespace Miru_Naibu
                 Console.WriteLine("LoadPlugins....");
                 PluginManager.LoadPlugins();
             }
-            
+
             /*
             Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll"));
             string[] x = {Path.Combine(Directory.GetCurrentDirectory(), @"SystemPlugin\HelloPlugin\bin\Debug\netcoreapp3.0\HelloPlugin.dll")}; 
-            PluginManager.Start(x);
+            */
+            //PluginManager.Start(x);
             //Run FASE - Checking
             MiruNaibu terminal = MiruNaibu.GetMiruNaibuInstance;
             //Start
@@ -41,7 +42,6 @@ namespace Miru_Naibu
             else if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrWhiteSpace(cmd)){
                 terminal.RunCommand(Command.CmdSplit(cmd)); }
             } while (true);
-            */
             Console.ReadKey();
         }
     }
