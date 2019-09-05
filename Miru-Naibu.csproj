@@ -22,10 +22,10 @@
     <!--
     -->
   <ItemGroup>
-    <Compile Remove="SystemPlugins\**" />
-    <Content Remove="SystemPlugins\**" />
-    <EmbeddedResource Remove="SystemPlugins\**" />
-    <None Remove="SystemPlugins\**" />
+    <Compile Remove="ExternalPlugins\**" />
+    <Content Remove="ExternalPlugins\**" />
+    <EmbeddedResource Remove="ExternalPlugins\**" />
+    <None Remove="ExternalPlugins\**" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -50,10 +50,10 @@
   
   <!--
   <ItemGroup>
-    <ProjectReference Include="SystemSystemPlugins\HelloPlugin\HelloPlugin.csproj" />
+    <ProjectReference Include="SystemExternalPlugins\HelloPlugin\HelloPlugin.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="SystemSystemPlugins\XcopyablePlugin\XcopyablePlugin.csproj" />
+    <ProjectReference Include="SystemExternalPlugins\XcopyablePlugin\XcopyablePlugin.csproj" />
   </ItemGroup>
   -->
 
