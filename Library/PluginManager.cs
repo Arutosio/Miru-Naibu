@@ -9,7 +9,7 @@ namespace Miru_Naibu.Library
 {
     public static class PluginManager {
         public static string[] pluginPaths = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
-        public static IEnumerable<ICommand> commands;
+        public static IEnumerable<ACommand> commands;
         public static void ReloadPlugins() {
             commands = pluginPaths.SelectMany(pluginPath => {
                 Assembly pluginAssembly = LoadPlugin(pluginPath);
@@ -29,11 +29,11 @@ namespace Miru_Naibu.Library
             PluginLoadContext loadContext = new PluginLoadContext(pluginLocation);
             return loadContext.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(pluginLocation)));
         }
-        public static IEnumerable<ICommand> CreateCommands(Assembly assembly) {
+        public static IEnumerable<ACommand> CreateCommands(Assembly assembly) {
             int count = 0;
             foreach (Type type in assembly.GetTypes()) {
-                if (typeof(ICommand).IsAssignableFrom(type)) {
-                    ICommand result = Activator.CreateInstance(type) as ICommand;
+                if (typeof(ACommand).IsAssignableFrom(type)) {
+                    ACommand result = Activator.CreateInstance(type) as ACommand;
                     if (result != null) {
                         count++;
                         yield return result;
@@ -43,7 +43,7 @@ namespace Miru_Naibu.Library
             if (count == 0) {
                 string availableTypes = string.Join(",", assembly.GetTypes().Select(t => t.FullName));
                 throw new ApplicationException(
-                    $"Can't find any type which implements ICommand in {assembly} from {assembly.Location}.\n" +
+                    $"Can't find any type which implements ACommand in {assembly} from {assembly.Location}.\n" +
                     $"Available types: {availableTypes}"
                 );
             }
@@ -65,7 +65,7 @@ namespace Miru_Naibu.Library
                 string[] allDll = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "*.dll");
                 //PrintFilesDir(allDll);
                 List<Assembly> pluginsAssembly = new List<Assembly>();
-                //IEnumerable<ICommand> cmds = new IEnumerable<ICommand>();
+                //IEnumerable<ACommand> cmds = new IEnumerable<ACommand>();
                 foreach (string  pahtFile in allDll)
                 {
                     Console.WriteLine($"Loading commands from: {pahtFile}");

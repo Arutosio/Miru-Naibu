@@ -50,13 +50,10 @@ namespace Miru_Naibu.Entities
                         Console.WriteLine("Write a command.");
                     } 
                     else {
-                        ICommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
-                        if (command != null) { command.Execute(); } 
+                        ACommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
+                        if (command != null) { command.Switch(cmdList); } 
                         else { 
-                            Console.WriteLine($"Command \"{cmdFirst}\" not found."); 
-                            foreach (ICommand cmd in PluginManager.commands) {
-                                Console.WriteLine($"Name: {cmd.Name}\t -Author: {cmd.Author}  -CMD: {cmd.Cmd} -Desc: {cmd.Description}");
-                            } //END Output load commands.
+                            Console.WriteLine($"Command \"{cmdFirst}\" not found.");
                         }
                     }
                 break;

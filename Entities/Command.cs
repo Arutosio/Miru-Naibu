@@ -3,30 +3,26 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Miru_Naibu.Library;
 using static System.ConsoleColor;
+using PluginBase;
 
 namespace Miru_Naibu.Entities
 {
-    public class Command
+    public class Command : ACommand
     {
         private Command() {}
-        public Command(string name, string type, string cmd,string description) {
+        public Command(string name,string author, string type, string cmd,string description) {
             Name = name;
+            Author = author;
             Type = type;
             Cmd = cmd;
             Description = description;
         }
-        public string Name { get; private set; }
-        public string Type { get; private set; }
-        public string Cmd { get; private set; }
-        public string Description { get; private set; }
-
-        
         //STATIC
         public static List<Command> commandList = new List<Command>();
         internal static void LoadCommands() {
-            commandList.Add(new Command("Help","System","help","Info commands"));
-            commandList.Add(new Command("Setting","System","setting","Change setting"));
-            commandList.Add(new Command("ChangeDirectory","System","cd","Move in the directorys"));
+            commandList.Add(new Command("Help","Arutosio","System","help","Info commands"));
+            commandList.Add(new Command("Setting", "Arutosio", "System","setting","Change setting"));
+            commandList.Add(new Command("ChangeDirectory", "Arutosio", "System","cd","Move in the directorys"));
             //return commandList;
         }
         public static List<string> CmdSplit(string cmdLine) {
