@@ -10,29 +10,39 @@ namespace Miru_Naibu.MethodCommandSystem
 {
     public sealed class Help
     {
-        public static void HelpSwitch(List<string> subCmdList) {
-            switch (subCmdList.Count) {
+        public static void OnJoin(List<string> cmdParam)
+        {
+            Switch(cmdParam);
+        }
+
+        private static void Switch(List<string> cmdParam)
+        {
+            switch (cmdParam.Count)
+            {
                 case 0:
-                CommandList();
-                break;
+                    CommandList();
+                    break;
                 case 1:
-                CommandInfo(subCmdList[0]);
-                break;
+                    CommandInfo(cmdParam[0]);
+                    break;
                 default:
-                Console.WriteLine("Command not found");
-                break;
+                    Console.WriteLine("Command not found");
+                    break;
             }
         }
         private static void CommandList() {
             Console.WriteLine("Command List:\r\n");
+            int numCMD = 0;
             foreach (ACommand cmd in CMD.commandList) {
                 CommandInfo(cmd.Cmd);
+                numCMD++;
             }
-            foreach (ACommand cmd in Miru_Naibu.Library.PluginManager.commands)
+            foreach (ACommand cmd in PluginManager.commands)
             {
                 CommandInfo(cmd.Cmd);
+                numCMD++;
             }
-            Console.WriteLine($"Numer of command: {CMD.commandList.Count}");
+            Console.WriteLine($"Numer of command: {numCMD}");
         }
         private static void CommandInfo(string cmd) {
             bool found = false;
@@ -61,7 +71,7 @@ namespace Miru_Naibu.MethodCommandSystem
         private static void CommandInfo(ACommand cmdObj)
         {
             Console.WriteLine("\\ Name: " + cmdObj.Name);
-            Console.Write(" |Author: "); ColorLine.WriteLineC(cmdObj.Author, Yellow);
+            Console.Write(" |Author: "); ColorLine.WriteLineC(cmdObj.Author, Green);
             Console.Write(" |Type: "); ColorLine.WriteLineC(cmdObj.Type, Yellow);
             Console.Write(" |Command: "); ColorLine.WriteLineC(cmdObj.Cmd, Cyan);
             Console.Write(" `Description: " + cmdObj.Description + "\r\n");

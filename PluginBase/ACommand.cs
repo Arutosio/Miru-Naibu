@@ -7,18 +7,28 @@ namespace PluginBase
     public abstract class ACommand
     {
 
-        public string Name { get; set; } = "Name is None";
-        public string Author { get; set; } = "Author is None";
-        public string Type { get; set; } = "Type is None";  
-        public string Cmd { get; set; } = "Cmd is None";
-        public string Description { get; set; } = "Desciption is None";
-        public int ActionCount { get; set; } = 0;
+        public abstract string Name { get; set; }
+        public abstract string Author { get; set; }
+        public abstract string Type { get; set; }
+        public abstract string Cmd { get; set; }
+        public abstract string Description { get; set; }
+        protected int ActionCount { get; set; } = 0;
 
-        public virtual void OnJoin()
+        public ACommand() { }
+
+        public abstract void OnJoin(List<string> cmdParam);
+        #region
+        /*
+        public virtual void OnJoin(List<string> cmdParam)
         {
             this.ActionCount = 0;
             //throw new NotImplementedException();
         }
+        */
+        #endregion
+        protected abstract void Switch(List<string> cmdParam);
+        #region
+        /*
         public virtual void Switch(List<string> cmdParam)
         {
             switch (cmdParam.Count)
@@ -34,21 +44,43 @@ namespace PluginBase
                     break;
             }
         }
+        */
+        #endregion
+        protected abstract int Execute();
+        #region
+        /*
+        #endregion
         protected virtual int Execute() {
             Console.WriteLine("ACommand Execute");
             return 0;
         }
+        */
+        #endregion
+        protected abstract int Execute(string param);
+        #region
+        /*
         protected virtual int Execute(string param) {
             Console.WriteLine($"ACommand Execute(string {param})");
             return 0;
         }
+        */
+        #endregion
+        protected abstract int Execute(string[] subInCmd);
+        #region
+        /*
         protected virtual int Execute(string[] subInCmd) {
             Console.WriteLine($"ACommand Execute(string[] {subInCmd.ToString()}");
             return 0;
         }
+        */
+        #endregion
+        protected abstract void OnExit();
+        #region
+        /*
         protected virtual void OnExit() {
             Console.WriteLine("ACommand OnExit()");
-
         }
+        */
+        #endregion
     }
 }

@@ -32,7 +32,7 @@ namespace Miru_Naibu.Entities
             cmdList.RemoveAt(0);
             switch (cmdFirst) {
                 case "help":
-                    Help.HelpSwitch(cmdList);
+                    Help.OnJoin(cmdList);
                 break;
                 case "setting":
                     Setting.SettingSwitch(cmdList);
@@ -51,7 +51,7 @@ namespace Miru_Naibu.Entities
                     } 
                     else {
                         ACommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
-                        if (command != null) { command.Switch(cmdList); } 
+                        if (command != null) { command.OnJoin(cmdList); } 
                         else { 
                             Console.WriteLine($"Command \"{cmdFirst}\" not found.");
                         }

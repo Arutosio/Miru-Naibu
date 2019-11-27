@@ -9,7 +9,11 @@ namespace Miru_Naibu.Entities
 {
     public class Command : ACommand
     {
-        private Command() {}
+        public override string Name { get; set; } = "NONE";
+        public override string Author { get; set; } = "NONE";
+        public override string Type { get; set; } = "NONE";
+        public override string Cmd { get; set; } = "NONE";
+        public override string Description { get; set; } = "NONE";
         public Command(string name,string author, string type, string cmd,string description) {
             Name = name;
             Author = author;
@@ -19,6 +23,8 @@ namespace Miru_Naibu.Entities
         }
         //STATIC
         public static List<Command> commandList = new List<Command>();
+
+
         internal static void LoadCommands() {
             commandList.Add(new Command("Help","Arutosio","System","help","Info commands"));
             commandList.Add(new Command("Setting", "Arutosio", "System","setting","Change setting"));
@@ -55,6 +61,36 @@ namespace Miru_Naibu.Entities
                 }
             }
             return false;
+        }
+
+        public override void OnJoin(List<string> cmdParam)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Switch(List<string> cmdParam)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int Execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int Execute(string param)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int Execute(string[] subInCmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnExit()
+        {
+            throw new NotImplementedException();
         }
     }
 }
