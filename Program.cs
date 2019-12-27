@@ -19,9 +19,9 @@ namespace Miru_Naibu
             Console.WriteLine("ASDF");
             Console.Write("QWER");
             ProgBar x = new ProgBar(22);
-            for(double i = 0; i <= 100; i += 0.5) {
-                x.PrintProgress(i);
-                System.Threading.Thread.Sleep(50);
+            for(double i = 0; i <= 23452; i += 0.5) {
+                x.PrintProgress(x.PercentCalculation(i,23452));
+                //System.Threading.Thread.Sleep(50);
             }
             /*END Testring*/
             if(!PluginManager.CheckDirPlugins()) {
