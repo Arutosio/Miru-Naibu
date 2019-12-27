@@ -15,8 +15,15 @@ namespace Miru_Naibu
     {//Command to make a release: dotnet publish -c Release -r win10-x64 OR linux-x64
         static void Main(string[] args)
         {
-            /*
-            */
+            /*Testring*/
+            Console.WriteLine("ASDF");
+            Console.Write("QWER");
+            ProgBar x = new ProgBar(22);
+            for(double i = 0; i <= 100; i += 0.5) {
+                x.PrintProgress(i);
+                System.Threading.Thread.Sleep(50);
+            }
+            /*END Testring*/
             if(!PluginManager.CheckDirPlugins()) {
                Console.WriteLine("Install...");
                PluginManager.Install();

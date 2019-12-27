@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RuntimeFrameworkVersion>3.0.0-preview8-28405-07</RuntimeFrameworkVersion> <!--  -->
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Miru_Naibu</RootNamespace>
     <ApplicationIcon>Resources\Miru-Naibu_icon.ico</ApplicationIcon>
     <Win32Resource />
