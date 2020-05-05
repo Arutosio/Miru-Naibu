@@ -33,11 +33,11 @@ namespace Miru_Naibu.MethodCommandSystem
         private static void CommandList() {
             Console.WriteLine("Command List:\r\n");
             int numCMD = 0;
-            foreach (ACommand cmd in CMD.commandList) {
+            foreach (ICommand cmd in CMD.commandList) {
                 CommandInfo(cmd.Cmd);
                 numCMD++;
             }
-            foreach (ACommand cmd in PluginManager.commands)
+            foreach (ICommand cmd in PluginManager.commands)
             {
                 CommandInfo(cmd.Cmd);
                 numCMD++;
@@ -56,7 +56,7 @@ namespace Miru_Naibu.MethodCommandSystem
             } 
             if (!found)
             {
-                foreach(ACommand cmdObj in Miru_Naibu.Library.PluginManager.commands)
+                foreach(ICommand cmdObj in Miru_Naibu.Library.PluginManager.commands)
                 {
                     if (cmdObj.Cmd.Equals(cmd))
                     {
@@ -68,7 +68,7 @@ namespace Miru_Naibu.MethodCommandSystem
             }
             else if(!found) { Console.WriteLine($"Command {cmd} not found."); }
         }
-        private static void CommandInfo(ACommand cmdObj)
+        private static void CommandInfo(ICommand cmdObj)
         {
             Console.WriteLine("\\ Name: " + cmdObj.Name);
             Console.Write(" |Author: "); ColorLine.WriteLineC(cmdObj.Author, Green);

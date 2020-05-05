@@ -362,3 +362,6 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode
 .vscode/launch.json
 .vscode/tasks.json
+
+# IGNORE FILE Project
+Plugins/

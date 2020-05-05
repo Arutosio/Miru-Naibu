@@ -7,28 +7,30 @@ using PluginBase;
 
 namespace Miru_Naibu.Entities
 {
-    public class Command : ACommand
+    public class Command : ICommand
     {
-        public override string Name { get; set; } = "NONE";
-        public override string Author { get; set; } = "NONE";
-        public override string Type { get; set; } = "NONE";
-        public override string Cmd { get; set; } = "NONE";
-        public override string Description { get; set; } = "NONE";
-        public Command(string name,string author, string type, string cmd,string description) {
+        public string Name { get => Name; set => Name = value; }
+        public string Author { get => Author; set => Author = value; }
+        public string Type { get => Type; set => Type = value; }
+        public string Cmd { get => Cmd; set => Cmd = value; }
+        public string Description { get => Description; set => Description = value; }
+        public int ActionCount { get => ActionCount; set => ActionCount = value; }
+
+        public Command(string name,string author, string type, string cmd,string description, int actionCount) {
             Name = name;
             Author = author;
             Type = type;
             Cmd = cmd;
             Description = description;
+            ActionCount = actionCount;
         }
         //STATIC
         public static List<Command> commandList = new List<Command>();
 
-
         internal static void LoadCommands() {
-            commandList.Add(new Command("Help","Arutosio","System","help","Info commands"));
-            commandList.Add(new Command("Setting", "Arutosio", "System","setting","Change setting"));
-            commandList.Add(new Command("ChangeDirectory", "Arutosio", "System","cd","Move in the directorys"));
+            commandList.Add(new Command("Help","Arutosio","System","help","Info commands",0));
+            commandList.Add(new Command("Setting", "Arutosio", "System","setting","Change setting",0));
+            commandList.Add(new Command("ChangeDirectory", "Arutosio", "System","cd","Move in the directorys",0));
             //return commandList;
         }
         public static List<string> CmdSplit(string cmdLine) {
@@ -63,32 +65,22 @@ namespace Miru_Naibu.Entities
             return false;
         }
 
-        public override void OnJoin(List<string> cmdParam)
+        public int Execute()
         {
             throw new NotImplementedException();
         }
 
-        protected override void Switch(List<string> cmdParam)
+        public int Execute(string param)
         {
             throw new NotImplementedException();
         }
 
-        protected override int Execute()
+        public int Execute(string[] subInCmd)
         {
             throw new NotImplementedException();
         }
 
-        protected override int Execute(string param)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override int Execute(string[] subInCmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnExit()
+        public int Execute(List<string> subInCmd)
         {
             throw new NotImplementedException();
         }

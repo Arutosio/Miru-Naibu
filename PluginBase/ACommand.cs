@@ -51,7 +51,7 @@ namespace PluginBase
         /*
         #endregion
         protected virtual int Execute() {
-            Console.WriteLine("ACommand Execute");
+            Console.WriteLine("ICommand Execute");
             return 0;
         }
         */
@@ -60,7 +60,7 @@ namespace PluginBase
         #region
         /*
         protected virtual int Execute(string param) {
-            Console.WriteLine($"ACommand Execute(string {param})");
+            Console.WriteLine($"ICommand Execute(string {param})");
             return 0;
         }
         */
@@ -69,7 +69,7 @@ namespace PluginBase
         #region
         /*
         protected virtual int Execute(string[] subInCmd) {
-            Console.WriteLine($"ACommand Execute(string[] {subInCmd.ToString()}");
+            Console.WriteLine($"ICommand Execute(string[] {subInCmd.ToString()}");
             return 0;
         }
         */
@@ -78,7 +78,7 @@ namespace PluginBase
         #region
         /*
         protected virtual void OnExit() {
-            Console.WriteLine("ACommand OnExit()");
+            Console.WriteLine("ICommand OnExit()");
         }
         */
         #endregion

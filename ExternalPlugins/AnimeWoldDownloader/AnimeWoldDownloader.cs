@@ -5,78 +5,34 @@ using Miru_Naibu.Library;
 
 namespace AnimeWoldDownloader
 {
-    public class AnimeWoldDownloader : ACommand
+    public class AnimeWoldDownloader : ICommand
     {
-         public override string Name { get; set; } = "AnimeWoldDownloader";
-         public override string Author { get; set; } = "Arutosio";
-         public override string Type { get; set; } = "Plugin";
-         public override string Cmd { get; set; } = "AnimeWoldDownloader";
-         public override string Description { get; set; } = "AnimeWoldDownloader command print that you write";
+        public string Name { get => "Multi File Downloader By Single URL"; set => throw new NotImplementedException(); }
+        public string Author { get => "Arutosio"; set => throw new NotImplementedException(); }
+        public string Type { get => "Plugin"; set => throw new NotImplementedException(); }
+        public string Cmd { get => "mfd"; set => throw new NotImplementedException(); }
+        public string Description { get => "Multi File Downloader By Single URL"; set => throw new NotImplementedException(); }
+        public int ActionCount { get => 0; set => ActionCount = value; }
 
-        public override void OnJoin(List<string> cmdParam)
+        public int Execute()
         {
-            Switch(cmdParam);
-            OnExit();
-        }
-        protected override void Switch(List<string> cmdParam)
-        {
-            switch (cmdParam.Count)
-            {
-                case 0:
-                    Execute();
-                    break;
-                case 1:
-                    Execute(cmdParam[0]);
-                    break;
-                default:
-                    Execute(cmdParam.ToArray());
-                    break;
-            }
-        }
-        protected override int Execute()
-        {
-            //Console.Write("Write: ");
-            ColorLine.WriteC("Write: ",ConsoleColor.Yellow);
-            Console.WriteLine(Console.ReadLine());
+            Console.WriteLine("FileDownloader Execute()");
             return 0;
         }
 
-        protected override int Execute(string param)
+        public int Execute(string param)
         {
-            Console.WriteLine(param);
-            return 0;
+            throw new NotImplementedException();
         }
 
-        protected override int Execute(string[] cmdParam)
+        public int Execute(string[] subInCmd)
         {
-            int num = 0;
-            string res = "";
-            foreach (string str in cmdParam)
-            {
-                res += $"{str} ";
-            }
-            try
-            {
-                num = int.Parse(cmdParam[cmdParam.Length - 1]);
-                //cmdParam = cmdParam.
-            } catch
-            {
-                num = - 1;
-            }
-            if (num >= 2)
-            {
-                for (int i = 0; i < num; i++)
-                {
-                    Console.WriteLine(res);
-                }
-            }
-            else { Console.WriteLine(res); }
-            return 0;
+            throw new NotImplementedException();
         }
 
-        protected override void OnExit()
+        public int Execute(List<string> subInCmd)
         {
-            ActionCount = 0;
+            throw new NotImplementedException();
         }
     }
 }

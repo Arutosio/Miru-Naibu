@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Miru_Naibu.Library;
-using Miru_Naibu.MethodCommandSystem;
 using PluginBase;
+using Miru_Naibu.MethodCommandSystem;
 using static System.ConsoleColor;
 
 namespace Miru_Naibu.Entities
@@ -50,8 +50,8 @@ namespace Miru_Naibu.Entities
                         Console.WriteLine("Write a command.");
                     } 
                     else {
-                        ACommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
-                        if (command != null) { command.OnJoin(cmdList); } 
+                        ICommand command = PluginManager.commands.FirstOrDefault(c => c.Cmd == cmdFirst);
+                        if (command != null) { command.Execute(cmdList); } 
                         else { 
                             Console.WriteLine($"Command \"{cmdFirst}\" not found.");
                         }
