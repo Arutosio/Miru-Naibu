@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Miru_Naibu.Entities;
-using Miru_Naibu.MethodCommandSystem;
 
 namespace Miru_Naibu.MethodCommandSystem
 {
@@ -27,14 +26,14 @@ namespace Miru_Naibu.MethodCommandSystem
         }
         private static void ListOfDirectory()
         {
-            string[] listOfFolders = Directory.GetDirectories(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, "",SearchOption.AllDirectories);
+            string[] listOfFolders = Directory.GetDirectories(MiruNaibu.Root.FullName, "",SearchOption.AllDirectories);
             for (int i = 0; i < listOfFolders.Length; i++) {
                 Console.WriteLine("Num: {0} - Folder Name: {1}", i, Path.GetDirectoryName(listOfFolders[i]));
             }
         }
         internal static void ListOfFiles()
         {
-            string[] listOfFiles = Directory.GetFiles(MiruNaibu.GetMiruNaibuInstance.CurrentDirectory.FullName, "*");
+            string[] listOfFiles = Directory.GetFiles(MiruNaibu.Root.FullName, "*");
             for (int i = 0; i < listOfFiles.Length; i++) {
                 Console.WriteLine("Num: {0} - File Name: {1} - DateCreation {2} ", i, Path.GetFileName(listOfFiles[i]), File.GetLastWriteTime(listOfFiles[i]).ToString());
             }

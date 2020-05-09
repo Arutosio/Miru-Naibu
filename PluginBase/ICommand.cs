@@ -8,6 +8,7 @@ namespace PluginBase
 
         string Name { get; }
         string Author { get; }
+        string Version { get; }
         string Type { get; }
         string Cmd { get; }
         string Description { get; }
