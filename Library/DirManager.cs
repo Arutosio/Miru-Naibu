@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Miru_Naibu.Entities;
 
 namespace Miru_Naibu.Library
@@ -16,19 +17,17 @@ namespace Miru_Naibu.Library
         }
         public static DirectoryInfo GoUnderDirectory(DirectoryInfo strRoot) 
         {
-            return strRoot = strRoot.Parent;
+            return strRoot.Parent != null ? strRoot.Parent : strRoot;
         }
-        public static DirectoryInfo GoSubDirectory(string folderName) 
+        public static DirectoryInfo GoSubDirectory(DirectoryInfo strRoot, string folderName) 
         {
-            
-            if(Path.IsPathRooted(folderName) && Directory.Exists(folderName))
+            IEnumerable<string> dirs = Directory.EnumerateDirectories(strRoot.FullName);
+            bool isThere = dirs.Where(x => new DirectoryInfo(x).Name.Equals(folderName)).Any();
+            string tmp = Path.Combine(strRoot.FullName, folderName);
+            if (Directory.Exists(tmp) && isThere)
             {
-                return new DirectoryInfo(folderName);
+                return new DirectoryInfo(tmp);
             }
-            else if (Directory.Exists(Path.Combine(folderName, folderName)))
-            {
-                return new DirectoryInfo(folderName);
-            } 
             else { throw new AruLibException($"The folder \"{folderName}\" does not exits in the current directory."); }
         }
         public static bool CreateFolder(string dirFolder) 

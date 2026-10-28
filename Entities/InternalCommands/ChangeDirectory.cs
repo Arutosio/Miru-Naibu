@@ -25,29 +25,35 @@ namespace Miru_Naibu.Entities.InternalCommands
         }
         public int Execute(string param)
         {
-            Switch(param);
+            switch (param) 
+            {
+                case "..":
+                    MiruNaibu.Root = DirManager.GoUnderDirectory(MiruNaibu.Root);
+                break;
+                // case "mkdir":
+                //     CreateFolderMKDIR(param);
+                // break;
+                default:
+                    try { MiruNaibu.Root = DirManager.GoSubDirectory(MiruNaibu.Root, param); }
+                    catch (AruLibException ex) { Console.WriteLine(ex.Message); }
+                break;
+            }
             return 0;
         }
         public int Execute(string[] subInCmd)
         {
             throw new NotImplementedException();
         }
-
         public int Execute(List<string> subInCmd)
         {
             throw new NotImplementedException();
         }
-        private void Switch(string param) 
-        {
-            switch (param) 
-            {
-                case "..":
-                    DirManager.GoUnderDirectory(MiruNaibu.Root);
-                break;
-                default:
-                    DirManager.GoSubDirectory(param);
-                break;
-            }
-        }
+        // private void CreateFolderMKDIR(string param)
+        // {
+        //     if(DirManager.CreateFolder(param))
+        //         Console.WriteLine($"Folder {param} created.");
+        //     else 
+        //         Console.WriteLine($"Can not be create the new folder");
+        // }
     }
 }
